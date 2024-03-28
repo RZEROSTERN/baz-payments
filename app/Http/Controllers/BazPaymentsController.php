@@ -49,9 +49,6 @@ class BazPaymentsController extends Controller
                     ]
                 ];
 
-                var_dump($payloadPaymentURL);
-                exit();
-
                 $responseURL = Http::withHeaders([
                     'Authorization' => 'Bearer ' . $bazAuthResponse->access_token,
                     'x-id-acceso' => $accessKeysResponse->resultado->idAcceso
