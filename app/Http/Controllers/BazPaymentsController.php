@@ -41,7 +41,7 @@ class BazPaymentsController extends Controller
             if (isset($accessKeysResponse->resultado->idAcceso)) {
                 $payloadPaymentURL = [
                     "idComercio" => $merchantId,
-                    "enlaceRedireccion" => "https://dev1.mx",
+                    "enlaceRedireccion" => "https://unitech.mx",
                     "ordenPago" => [
                         "referencia" => "UNITECH-TEST-" . time(),
                         "monto" => $this->encrypt($accessKeysResponse->resultado->accesoPublico, "100.00"),
@@ -56,7 +56,8 @@ class BazPaymentsController extends Controller
 
                 $urlResponse = json_decode($responseURL->getBody()->getContents());
 
-                return response()->json(['success' => true, 'data' => $bazAuthResponse, 'keys' => $accessKeysResponse, 'url' => $urlResponse], 200);
+                // return response()->json(['success' => true, 'data' => $bazAuthResponse, 'keys' => $accessKeysResponse, 'url' => $urlResponse], 200);
+                return response()->json(['success' => true, 'data' => $urlResponse], 200);
             } else {
                 return response()->json(['success' => false, 'message' => 'Error al procesar clave de acceso ante Banco Azteca', 'data' => $accessKeysResponse], 401);
             }
