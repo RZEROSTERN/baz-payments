@@ -41,10 +41,10 @@ class BazPaymentsController extends Controller
             if (isset($accessKeysResponse->resultado->idAcceso)) {
                 $payloadPaymentURL = [
                     "idComercio" => $merchantId,
-                    "enlaceRedireccion" => "https://unitech.mx",
+                    "enlaceRedireccion" => "https://unitech.edu.mx/gracias-2/",
                     "ordenPago" => [
                         "referencia" => "UNITECH-TEST-" . time(),
-                        "monto" => $this->encrypt($accessKeysResponse->resultado->accesoPublico, "100.00"),
+                        "monto" => $this->encrypt($accessKeysResponse->resultado->accesoPublico, "1.00"),
                         "codigoMoneda" => $this->encrypt($accessKeysResponse->resultado->accesoPublico, "MXN"),
                     ]
                 ];

@@ -16,5 +16,4 @@ try:
 
     print(result)
 except IndexError:
-	print("500")
-
+        print("500")
