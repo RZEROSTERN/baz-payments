@@ -47,7 +47,7 @@ class BazPaymentsController extends Controller
                     "enlaceRedireccion" => "https://unitech.edu.mx/gracias-2/",
                     "ordenPago" => [
                         "referencia" => "UNITECH-PAGO-" . $request->post('matricula') . "-" . time(),
-                        "monto" => $this->encrypt($accessKeysResponse->resultado->accesoPublico, $request->post("amount")),
+                        "monto" => $this->encrypt($accessKeysResponse->resultado->accesoPublico, number_format($request->post("amount"), 2)),
                         "codigoMoneda" => $this->encrypt($accessKeysResponse->resultado->accesoPublico, "MXN"),
                     ]
                 ];
