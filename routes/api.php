@@ -8,4 +8,4 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::get('/baz/create-payment', [BazPaymentsController::class, 'createURL']);
+Route::post('/baz/create-payment', [BazPaymentsController::class, 'createURL']);
