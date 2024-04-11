@@ -10,7 +10,10 @@ class BazPaymentsController extends Controller
 {
     public function createURL(Request $request)
     {
-        $validator = Validator::make($request->all(), []);
+        $validator = Validator::make($request->all(), [
+            "amount" => 'required:numeric',
+            'matricula' => 'required',
+        ]);
 
         if ($validator->fails()) {
             return response()->json(['success' => false, 'error' => $validator->errors()], 401);
@@ -43,8 +46,8 @@ class BazPaymentsController extends Controller
                     "idComercio" => $merchantId,
                     "enlaceRedireccion" => "https://unitech.edu.mx/gracias-2/",
                     "ordenPago" => [
-                        "referencia" => "UNITECH-TEST-" . time(),
-                        "monto" => $this->encrypt($accessKeysResponse->resultado->accesoPublico, "1.00"),
+                        "referencia" => "UNITECH-PAGO-" . $request->post('matricula') . "-" . time(),
+                        "monto" => $this->encrypt($accessKeysResponse->resultado->accesoPublico, $request->post("amount")),
                         "codigoMoneda" => $this->encrypt($accessKeysResponse->resultado->accesoPublico, "MXN"),
                     ]
                 ];
