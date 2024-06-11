@@ -41,6 +41,8 @@ class BazPaymentsController extends Controller
 
             $accessKeysResponse = json_decode($responseAccessKeys->getBody()->getContents());
 
+            $isMSICompatible = ($request->post("amount") >= 3000) ? true : false;
+
             if (isset($accessKeysResponse->resultado->idAcceso)) {
                 $payloadPaymentURL = [
                     "idComercio" => $merchantId,
@@ -49,6 +51,7 @@ class BazPaymentsController extends Controller
                         "referencia" => "UNITECH-PAGO-" . $request->post('matricula') . "-" . time(),
                         "monto" => $this->encrypt($accessKeysResponse->resultado->accesoPublico, $request->post("amount")),
                         "codigoMoneda" => $this->encrypt($accessKeysResponse->resultado->accesoPublico, "MXN"),
+                        "diferible" => $isMSICompatible
                     ]
                 ];
 
