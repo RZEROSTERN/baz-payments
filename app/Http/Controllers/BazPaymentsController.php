@@ -50,8 +50,7 @@ class BazPaymentsController extends Controller
                     "ordenPago" => [
                         "referencia" => "UNITECH-PAGO-" . $request->post('matricula') . "-" . time(),
                         "monto" => $this->encrypt($accessKeysResponse->resultado->accesoPublico, $request->post("amount")),
-                        "codigoMoneda" => $this->encrypt($accessKeysResponse->resultado->accesoPublico, "MXN"),
-                        "diferible" => $isMSICompatible
+                        "codigoMoneda" => $this->encrypt($accessKeysResponse->resultado->accesoPublico, "MXN")
                     ]
                 ];
 
@@ -62,7 +61,6 @@ class BazPaymentsController extends Controller
 
                 $urlResponse = json_decode($responseURL->getBody()->getContents());
 
-                // return response()->json(['success' => true, 'data' => $bazAuthResponse, 'keys' => $accessKeysResponse, 'url' => $urlResponse], 200);
                 return response()->json(['success' => true, 'data' => $urlResponse], 200);
             } else {
                 return response()->json(['success' => false, 'message' => 'Error al procesar clave de acceso ante Banco Azteca', 'data' => $accessKeysResponse], 401);
