@@ -50,7 +50,8 @@ class BazPaymentsController extends Controller
                     "ordenPago" => [
                         "referencia" => "UNITECH-PAGO-" . $request->post('matricula') . "-" . time(),
                         "monto" => $this->encrypt($accessKeysResponse->resultado->accesoPublico, $request->post("amount")),
-                        "codigoMoneda" => $this->encrypt($accessKeysResponse->resultado->accesoPublico, "MXN")
+                        "codigoMoneda" => $this->encrypt($accessKeysResponse->resultado->accesoPublico, "MXN"),
+                        "diferible" => $isMSICompatible
                     ]
                 ];
 
