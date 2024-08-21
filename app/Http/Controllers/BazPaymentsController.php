@@ -62,7 +62,7 @@ class BazPaymentsController extends Controller
 
                 $urlResponse = json_decode($responseURL->getBody()->getContents());
 
-                return response()->json(['success' => true, 'data' => $urlResponse, 'authResponse' => $bazAuthResponse, 'accessKeyResponse' => $accessKeysResponse], 200);
+                return response()->json(['success' => true, 'payload' => $payloadPaymentURL, 'data' => $urlResponse], 200);
             } else {
                 return response()->json(['success' => false, 'message' => 'Error al procesar clave de acceso ante Banco Azteca', 'data' => $accessKeysResponse], 401);
             }
